@@ -1,0 +1,12 @@
+---
+  - name: "Install mysql"
+    apt: pkg=mysql-server state=installed
+
+  - name: "Install mysql support for Python and Ansible"
+    apt: pkg=python-mysqldb state=installed
+
+  - name: Enable mysql-server startup.
+    service: name=mysql enabled=yes
+
+  - name: Make sure it's running.
+    service: name=mysql state=started

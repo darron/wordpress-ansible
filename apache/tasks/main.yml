@@ -1,0 +1,9 @@
+---
+  - name: "Install apache"
+    apt: pkg=apache2 state=installed
+
+  - name: Enable apache2 startup.
+    service: name=apache2 enabled=yes
+
+  - name: Make sure it's running.
+    service: name=apache2 state=started

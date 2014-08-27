@@ -1,0 +1,13 @@
+- hosts: wordpress-ansible
+  user: ubuntu
+  sudo: True
+  gather_facts: False
+
+  roles:
+    - common
+    - apache
+    - php
+    - mysql
+    - wordpress
+
+# NOTE: DO NOT USE THIS IN PRODUCTION - JUST TESTING AND COMPARING.

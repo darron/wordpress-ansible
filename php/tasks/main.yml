@@ -1,0 +1,16 @@
+---
+  - name: "Install PHP modules"
+    apt: pkg={{ item }} state=installed
+    with_items:
+      - libapache2-mod-php5
+      - php5-mysql
+      - mysql-client
+      - php-apc
+      - php5-gd
+      - php5-memcache
+      - php5-memcached
+      - php5-curl
+      - php5-tidy
+
+  - name: Make sure it's restarted the Apache server.
+    service: name=apache2 state=restarted

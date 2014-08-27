@@ -1,0 +1,28 @@
+---
+  - name: Download Wordpress
+    get_url: url=http://wordpress.org/latest.tar.gz dest=/var/www/wordpress.tar.gz
+
+  - name: Extract archive
+    command: chdir=/var/www/ /bin/tar xvf wordpress.tar.gz creates=/var/www/wordpress
+
+  - name: Remove the current 'html' folder.
+    command: rm -rf /var/www/html
+
+  - name: Mv wordpress to html.
+    command: mv /var/www/wordpress /var/www/html
+
+  - name: chown them all up.
+    command: chown -R root.root /var/www/html
+
+  - name: chmod them all up.
+    command: chmod -R 775 /var/www/html
+
+# NOTE: DO NOT USE THIS IN PRODUCTION.
+
+  - name: get the config.
+    command: chdir=/var/www/html wget https://gist.githubusercontent.com/darron/1747d6e64f3b70b9592e/raw/1abee0962e0ba4b1e20c33610e97f21a37b976c3/wp-config.php
+
+  - name: setup empty database for WordPress
+    mysql_db: name=wordpress encoding=utf8 collation=utf8_general_ci state=present login_user=root login_password=''
+
+# NOTE: DO NOT USE THIS IN PRODUCTION.
